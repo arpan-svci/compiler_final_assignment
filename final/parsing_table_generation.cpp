@@ -25,10 +25,10 @@ class prod_lr0{
     int rule[20];
     int length;
     int left_of_production;
-    prod_lr0(){
-        left_of_production=-1;
-    }
     public:
+        prod_lr0(){
+            left_of_production=-1;
+        }
         int getnonterminal(){
             return nonterminal;
         }
@@ -38,7 +38,7 @@ class prod_lr0{
         int getleft_of_production(){
             return left_of_production;
         }
-        void getlength(){
+        int getlength(){
             return length;
         }
         void putdott(int left_of_production){
@@ -66,10 +66,13 @@ class prod_lr0{
 class lr0item{
     prod_lr0 rules[100];
     int length;
-    lr0item(){
-        length=0;
-    }
     public:
+        lr0item(){
+            length=0;
+        }
+        prod_lr0* getproduction(){
+            return rules;
+        }
         void additem(prod_lr0 rule){
             rules[length++]=rule;
         }
@@ -77,7 +80,7 @@ class lr0item{
             if (item.length!=length)
                 return false;
             for(int i=0;i<length;i++){
-                if(!rules[i].compare(item.getrules()[i]))
+                if(!rules[i].compare(item.getproduction()[i]))
                     return false;
             }
             return true;
@@ -90,10 +93,10 @@ class lr0itemset{
     lr0item item[100];
 };
 
-lr0itemset lr0generation(production* productions,length){
+lr0itemset lr0generation(production* productions,int length){
         prod_lr0 items[100];
         for(int i=0;i<length;i++){
-            items[i].getdata(productions[i].getnonterminal(),productions[i].getrules(),productions[i].getlength())
+            items[i].getdata(productions[i].getnonterminal(),productions[i].getrules(),productions[i].getlength());
         }
 
 }
