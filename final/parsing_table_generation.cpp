@@ -104,7 +104,7 @@ lr0itemset lr0generation(production* productions,int length){
 
 //prod_lr0------lr0item-----lr0itemset
 int main(){
-    // cout<<"hello world";
+    cout<<"hello world";
     production p[100];
 
     return 0;
