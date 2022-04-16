@@ -93,7 +93,7 @@ class lr0itemset{
 lr0itemset lr0generation(production* productions,length){
         prod_lr0 items[100];
         for(int i=0;i<length;i++){
-            items[i]=productions[i].getnonterminal
+            items[i].getdata(productions[i].getnonterminal(),productions[i].getrules(),productions[i].getlength())
         }
 
 }
