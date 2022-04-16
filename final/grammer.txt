@@ -1,0 +1,49 @@
+ARGS -> T V , ARGS | T V
+
+P -> main ( ARGS ) { BODY }
+
+BODY -> STMT BODY | STMT
+
+STMT -> DECL | SIMPLE | FOR | IF
+
+IF -> if ( EXP ) { SIMPLES } else { SIMPLES }
+
+SIMPLES -> SIMPLES SIMPLES | SIMPLE
+
+FOR -> for ( EXP ; EXP ; EXP ) { FORSTMTS }
+
+FORSTMTS -> SIMPLE FORSTMTS | IF FORSTMTS | SIMPLE | IF
+
+SIMPLE -> EXP ; | ;
+
+DECL -> T L ;
+
+L -> V , L | V
+
+V -> DIM id | id | id DIM
+
+DIM -> [ num ] FULLDIM | [ NUM ]
+
+A -> A + T | T | A - T | -T
+
+T -> T * F | T / F | F
+
+F -> ( E )
+
+F -> ( A ) | V
+
+V -> NUM ^ id | const
+
+V2 -> V ^ id | V ^ const | id | const
+
+EXP -> A | R
+
+R -> A > A | A == A | A < A  | A
+
+E -> A ; | R ; | LV = A ;
+
+LV -> id | id 1NB
+
+1NB -> [ A ] 1NB | [ A ]
+
+	
