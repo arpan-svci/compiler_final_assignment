@@ -133,6 +133,10 @@ lr0itemset lr0generation(production* productions,int length){
         for(int i=0;i<length+1;i++){
             temp.additem(items[i]);
         }
+        prod_lr0 temporary;
+        for(int i=0;i<length+1;i++){
+            temporary=temp.getproduction()[i];
+        }
 }
 
 
