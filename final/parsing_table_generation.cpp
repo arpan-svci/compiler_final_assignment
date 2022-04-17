@@ -93,12 +93,31 @@ class lr0itemset{
     lr0item item[100];
 };
 
-lr0itemset lr0generation(production* productions,int length){
-        prod_lr0 items[100];
-        for(int i=0;i<length;i++){
-            items[i].getdata(productions[i].getnonterminal(),productions[i].getrules(),productions[i].getlength());
-        }
 
+//to add terminals and nonterminals to an array
+void addsymbol(int* nonterminals,int* length,int symbol){
+    for(int i=0;i<*length;i++){
+        if(nonterminals[i]==symbol)
+            return;
+    }
+    nonterminals[(*length)++]=symbol;
+}
+
+lr0itemset lr0generation(production* productions,int length){
+        int nonterminals[100],terminals[100],length_nonterminals=0,length_terminals=0;
+        prod_lr0 items[100];
+        int stratsymbol[]={200};
+        items[0].getdata(500,stratsymbol,1);
+        for(int i=1;i<length+1;i++){
+            items[i].getdata(productions[i].getnonterminal(),productions[i].getrules(),productions[i].getlength());
+            addsymbol(&nonterminals[0],&length_nonterminals,productions[i].getnonterminal());
+        }
+        lr0item itemlist[50];
+        int length_of_itemlist=0;
+        lr0item temp;
+        for(int i=0;i<length+1;i++){
+            temp.additem(items[i]);
+        }
 }
 
 
