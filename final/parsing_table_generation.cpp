@@ -118,6 +118,13 @@ void addsymbol(int* nonterminals,int* length,int symbol){
     nonterminals[(*length)++]=symbol;
 }
 
+lr0item getProduction(prod_lr0 item,prod_lr0 *items){
+    int symbol=item.getrules()[item.getleft_of_production()+1];
+
+}
+
+
+
 lr0itemset lr0generation(production* productions,int length){
         int nonterminals[100],terminals[100],length_nonterminals=0,length_terminals=0;
         prod_lr0 items[100];
@@ -128,15 +135,15 @@ lr0itemset lr0generation(production* productions,int length){
             addsymbol(&nonterminals[0],&length_nonterminals,productions[i].getnonterminal());               
         }
         lr0item itemlist[50];
+        bool complete[50];
         int length_of_itemlist=0;
         lr0item temp;
         for(int i=0;i<length+1;i++){
             temp.additem(items[i]);
         }
-        prod_lr0 temporary;
-        for(int i=0;i<length+1;i++){
-            temporary=temp.getproduction()[i];
-        }
+        itemlist[length_of_itemlist]=temp;
+        complete[length_of_itemlist]=true;
+        length_of_itemlist++;
 }
 
 
