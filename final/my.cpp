@@ -113,30 +113,17 @@ int addproduction(){
     return 0;
 }
 
-lr0itemset generate(vector<production>p){
-    map<int,vector<vector<int>>>rules;
-    vector<lr0item>items;
-    lr0item first,second;
-    for(auto i:p){
-        rules[i.getnonterminal()].push_back(i.getrules());
-        prod_lr0 pdt;
-        pdt.getdata(i.getnonterminal(),i.getrules());
-        first.additem(pdt);
-    }
-    items.push_back(first);
-    first.print();
-    cout<<endl<<endl;
 
-
-    //produce itemset
+void generateset(vector<lr0item>&items,int& checked,map<int,vector<vector<int>>>&rules,map<int,map<int,int>>&final_map){
+    cout<<"hello world";
     map<int,vector<prod_lr0>>temp;
+    lr0item first=items[++checked];
     for(auto i:first.getproduction()){
         if(i.getrules().size()>i.getleft_of_production()+1){
             i.putdott(i.getleft_of_production()+1);
             temp[i.getrules()[i.getleft_of_production()]].push_back(i);
         }
     }
-    lr0itemset itemset;
     for(auto i:temp){
         lr0item temp1;
         int symbol=i.first;
@@ -157,12 +144,79 @@ lr0itemset generate(vector<production>p){
                 temp1.additem(pdt);
             }
         }
-        items.push_back(temp1);
-
+        int index=items.size();
+        bool has=false;
+        for(int i=0;i<items.size();i++){
+            if(temp1.compare(items[i])){
+                has=true;
+                index=i;
+            }
+        }
+        if(has==false)
+            items.push_back(temp1);
+        final_map[checked][symbol]=index;
         cout<<endl<<endl;
         temp1.print();
         cout<<endl<<endl;
     }
+}
+
+lr0itemset generate(vector<production>p){
+    lr0itemset itemset;
+    int checked=-1;
+    map<int,map<int,int>> final_map;
+    map<int,vector<vector<int>>>rules;
+    vector<lr0item>items;
+    lr0item first;
+    for(auto i:p){
+        rules[i.getnonterminal()].push_back(i.getrules());
+        prod_lr0 pdt;
+        pdt.getdata(i.getnonterminal(),i.getrules());
+        first.additem(pdt);
+    }
+    items.push_back(first);
+    first.print();
+    cout<<endl<<endl;
+    while (checked<items.size()){
+        cout<<"hello world";
+        generateset(items,checked,rules,final_map);
+    }
+    
+    //produce itemset first is the input of the function
+    // map<int,vector<prod_lr0>>temp;
+    // for(auto i:first.getproduction()){
+    //     if(i.getrules().size()>i.getleft_of_production()+1){
+    //         i.putdott(i.getleft_of_production()+1);
+    //         temp[i.getrules()[i.getleft_of_production()]].push_back(i);
+    //     }
+    // }
+    // lr0itemset itemset;
+    // for(auto i:temp){
+    //     lr0item temp1;
+    //     int symbol=i.first;
+    //     queue<int> q;
+    //     for(auto j:i.second){
+    //         temp1.additem(j);
+    //         if(j.getleft_of_production()+1<j.getrules().size()){
+    //             q.push(j.getrules()[j.getleft_of_production()+1]);
+    //         }
+    //     }
+    //     while(!q.empty()){
+    //         int sym=q.front();
+    //         q.pop();
+    //         for(auto i:rules[sym]){
+    //             q.push(i[0]);
+    //             prod_lr0 pdt;
+    //             pdt.getdata(sym,i);
+    //             temp1.additem(pdt);
+    //         }
+    //     }
+    //     items.push_back(temp1);
+
+    //     cout<<endl<<endl;
+    //     temp1.print();
+    //     cout<<endl<<endl;
+    // }
     return itemset;
 }
 
