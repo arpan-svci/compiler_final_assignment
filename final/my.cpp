@@ -203,41 +203,6 @@ lr0itemset generate(vector<production>p){
         }
         cout<<endl;
     }
-    //produce itemset first is the input of the function
-    // map<int,vector<prod_lr0>>temp;
-    // for(auto i:first.getproduction()){
-    //     if(i.getrules().size()>i.getleft_of_production()+1){
-    //         i.putdott(i.getleft_of_production()+1);
-    //         temp[i.getrules()[i.getleft_of_production()]].push_back(i);
-    //     }
-    // }
-    // lr0itemset itemset;
-    // for(auto i:temp){
-    //     lr0item temp1;
-    //     int symbol=i.first;
-    //     queue<int> q;
-    //     for(auto j:i.second){
-    //         temp1.additem(j);
-    //         if(j.getleft_of_production()+1<j.getrules().size()){
-    //             q.push(j.getrules()[j.getleft_of_production()+1]);
-    //         }
-    //     }
-    //     while(!q.empty()){
-    //         int sym=q.front();
-    //         q.pop();
-    //         for(auto i:rules[sym]){
-    //             q.push(i[0]);
-    //             prod_lr0 pdt;
-    //             pdt.getdata(sym,i);
-    //             temp1.additem(pdt);
-    //         }
-    //     }
-    //     items.push_back(temp1);
-
-    //     cout<<endl<<endl;
-    //     temp1.print();
-    //     cout<<endl<<endl;
-    // }
     return itemset;
 }
 
