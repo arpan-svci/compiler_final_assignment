@@ -245,18 +245,3 @@ int main(){
 
     return 0;
 }
-
-
-
-
-
-   // for(auto i:temp){
-    //     cout<<endl<<endl<<i.first<<endl;
-    //     for(auto j:i.second){
-    //         cout<<j.getnonterminal()<<"->"<<'\t';
-    //         for(auto k:j.getrules()){
-    //             cout<<k<<'\t';
-    //         }
-    //         cout<<j.getleft_of_production();
-    //     }
-    // }
